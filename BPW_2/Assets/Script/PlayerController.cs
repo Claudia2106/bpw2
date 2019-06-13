@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator myAnim;
 
+    public Vector3 respawnPosition;
+
     public GameObject visualChildObject;
 
     // Start is called before the first frame update
@@ -23,6 +25,8 @@ public class PlayerController : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnim = GetComponentInChildren<Animator>();
+
+        respawnPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -55,5 +59,15 @@ public class PlayerController : MonoBehaviour
 
         myAnim.SetFloat("Speed", Mathf.Abs(myRigidbody.velocity.x));
         myAnim.SetBool("Groundless", isGrounded);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+      if(other.tag == "KillPlane")
+      {
+            // gameObject.SetActive(false);
+
+            transform.position = respawnPosition;
+        }
     }
 }
