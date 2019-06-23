@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
 
     public GameObject visualChildObject;
 
+    public AudioSource jumpSound;
+
+    public AudioSource bark;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             //myRigidbody.AddForce(new Vector2(transform.position.x,transform.position.y + jumpSpeed * 100));
             myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpSpeed, 0f);
+            jumpSound.Play();
         }
 
         myAnim.SetFloat("Speed", Mathf.Abs(myRigidbody.velocity.x));
@@ -68,6 +73,7 @@ public class PlayerController : MonoBehaviour
             // gameObject.SetActive(false);
 
             transform.position = respawnPosition;
+            bark.Play();
         }
     }
 }
